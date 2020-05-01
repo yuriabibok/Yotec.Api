@@ -17,7 +17,7 @@ namespace Yotec.Api.Modules
 
         private void SetEndpoints()
         {
-            //Get("/", async _ => SerializeHelper.Serialize(await articleService.CheckAvailabilityAsync()));
+            Get("/", async _ => SerializeHelper.Serialize(await articleService.CheckAvailabilityAsync()));
 
             Get("/list/{section}", async _ => SerializeHelper.Serialize(await articleService.GetSectionItemsAsync(_.section)));
 

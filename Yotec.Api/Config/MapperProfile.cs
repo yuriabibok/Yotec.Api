@@ -1,4 +1,5 @@
-﻿using AutoMapper;
+﻿using System;
+using AutoMapper;
 using Yotec.Api.Models;
 
 namespace Yotec.Api.Config
@@ -10,7 +11,9 @@ namespace Yotec.Api.Config
             CreateMap<dynamic, ArticleView>()
                 .ForMember(d => d.Heading, opt => opt.MapFrom((s, v) => s.title))
                 .ForMember(d => d.Link, opt => opt.MapFrom((s, v) => s.short_url))
-                .ForMember(d => d.Updated, opt => opt.MapFrom((s, v) => s.updated_date));
+                .ForMember(d => d.Updated,
+                    opt => opt.MapFrom((s, v) =>
+                        DateTime.Parse(s.updated_date.ToString())));
         }
     }
 }
