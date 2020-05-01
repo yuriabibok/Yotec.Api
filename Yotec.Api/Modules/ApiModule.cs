@@ -19,15 +19,22 @@ namespace Yotec.Api.Modules
         {
             Get("/", async _ => SerializeHelper.Serialize(await articleService.CheckAvailabilityAsync()));
 
-            Get("/list/{section}", async _ => SerializeHelper.Serialize(await articleService.GetSectionItemsAsync(_.section)));
+            Get("/list/{section}",
+                async _ => SerializeHelper.Serialize(await articleService.GetSectionItemsAsync(_.section)));
 
-            Get("/list/{section}/first", async _ => SerializeHelper.Serialize(await articleService.GetFirstSectionItemAsync(_.section)));
+            Get("/list/{section}/first",
+                async _ => SerializeHelper.Serialize(await articleService.GetFirstSectionItemAsync(_.section)));
 
-            Get("/list/{section}/{updatedDate}", async _ => SerializeHelper.Serialize(await articleService.GetSectionItemsByDateAsync(_.section, _.updatedDate)));
+            Get("/list/{section}/{updatedDate}",
+                async _ => SerializeHelper.Serialize(
+                    await articleService.GetSectionItemsByDateAsync(_.section, _.updatedDate)));
 
-            //Get("/article/{shortUrl}", async _ => SerializeHelper.Serialize(await articleService.GetSectionItemByShortUrl()));
+            Get("/article/{shortUrl}",
+                async _ => SerializeHelper.Serialize(await articleService.GetSectionItemByShortUrlAsync(_.shortUrl)));
 
-            //Get("/group/{section}", async _ => SerializeHelper.Serialize(await articleService.GetSectionItemsGroupedByDate()));
+            Get("/group/{section}",
+                async _ => SerializeHelper.Serialize(
+                    await articleService.GetSectionItemsGroupedByDateAsync(_.section)));
         }
     }
 }

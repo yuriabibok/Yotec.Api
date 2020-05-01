@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Yotec.Api.Config;
 using Yotec.Api.Helpers;
 using Yotec.Api.Models;
 
@@ -50,6 +51,28 @@ namespace Yotec.Api.Services
             var items = await articleHttpClient.GetItemsAsync(section);
 
             return items.Where(x => x.Updated.ToString("yyyy-MM-dd") == updatedDate);
+        }
+
+        public async Task<ArticleView> GetSectionItemByShortUrlAsync(string shortUrl)
+        {
+            Contract.NotNull(shortUrl, nameof(shortUrl));
+
+            var items = await articleHttpClient.GetItemsAsync(AppSettings.DefaultArticleSection);
+
+            return items.FirstOrDefault(x => x.Link.ToLower().Contains(shortUrl.ToLower()));
+        }
+
+        public async Task<IEnumerable<ArticleGroupByDateView>> GetSectionItemsGroupedByDateAsync(string section)
+        {
+            Contract.NotNull(section, nameof(section));
+
+            var items = await articleHttpClient.GetItemsAsync(section);
+
+            return items.GroupBy(x => x.Updated.Date).Select(x => new ArticleGroupByDateView
+            {
+                Date = x.Key.ToString("yyyy-MM-dd"),
+                Total = x.Count()
+            });
         }
     }
 }

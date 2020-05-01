@@ -13,5 +13,9 @@ namespace Yotec.Api.Services
         Task<ArticleView> GetFirstSectionItemAsync(string section);
 
         Task<IEnumerable<ArticleView>> GetSectionItemsByDateAsync(string section, string updatedDate);
+
+        Task<ArticleView> GetSectionItemByShortUrlAsync(string shortUrl);
+
+        Task<IEnumerable<ArticleGroupByDateView>> GetSectionItemsGroupedByDateAsync(string section);
     }
 }

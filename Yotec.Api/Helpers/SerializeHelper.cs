@@ -1,4 +1,5 @@
 ﻿using Newtonsoft.Json;
+using Newtonsoft.Json.Serialization;
 
 namespace Yotec.Api.Helpers
 {
@@ -6,7 +7,12 @@ namespace Yotec.Api.Helpers
     {
         public static string Serialize(object obj)
         {
-            return JsonConvert.SerializeObject(obj);
+            var serializerSettings = new JsonSerializerSettings
+            {
+                ContractResolver = new CamelCasePropertyNamesContractResolver()
+            };
+
+            return JsonConvert.SerializeObject(obj, serializerSettings);
         }
     }
 }
