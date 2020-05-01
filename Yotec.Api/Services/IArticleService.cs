@@ -9,5 +9,9 @@ namespace Yotec.Api.Services
         Task<string> CheckAvailabilityAsync();
 
         Task<IEnumerable<ArticleView>> GetSectionItemsAsync(string section);
+
+        Task<ArticleView> GetFirstSectionItemAsync(string section);
+
+        Task<IEnumerable<ArticleView>> GetSectionItemsByDateAsync(string section, string updatedDate);
     }
 }

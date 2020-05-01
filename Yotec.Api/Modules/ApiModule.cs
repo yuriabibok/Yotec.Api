@@ -21,9 +21,9 @@ namespace Yotec.Api.Modules
 
             Get("/list/{section}", async _ => SerializeHelper.Serialize(await articleService.GetSectionItemsAsync(_.section)));
 
-            //Get("/list/{section}/first", async _ => SerializeHelper.Serialize(await articleService.GetFirstSectionItem()));
+            Get("/list/{section}/first", async _ => SerializeHelper.Serialize(await articleService.GetFirstSectionItemAsync(_.section)));
 
-            //Get("/list/{section}/{updatedDate}", async _ => SerializeHelper.Serialize(await articleService.GetSectionItemsByDate()));
+            Get("/list/{section}/{updatedDate}", async _ => SerializeHelper.Serialize(await articleService.GetSectionItemsByDateAsync(_.section, _.updatedDate)));
 
             //Get("/article/{shortUrl}", async _ => SerializeHelper.Serialize(await articleService.GetSectionItemByShortUrl()));
 

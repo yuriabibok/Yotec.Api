@@ -1,5 +1,7 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
+using Yotec.Api.Helpers;
 using Yotec.Api.Models;
 
 namespace Yotec.Api.Services
@@ -24,9 +26,30 @@ namespace Yotec.Api.Services
 
         public async Task<IEnumerable<ArticleView>> GetSectionItemsAsync(string section)
         {
+            Contract.NotNull(section, nameof(section));
+
             var items = await articleHttpClient.GetItemsAsync(section);
 
             return items;
+        }
+
+        public async Task<ArticleView> GetFirstSectionItemAsync(string section)
+        {
+            Contract.NotNull(section, nameof(section));
+
+            var items = await articleHttpClient.GetItemsAsync(section);
+
+            return items.FirstOrDefault();
+        }
+
+        public async Task<IEnumerable<ArticleView>> GetSectionItemsByDateAsync(string section, string updatedDate)
+        {
+            Contract.NotNull(section, nameof(section));
+            Contract.NotNull(section, nameof(updatedDate));
+
+            var items = await articleHttpClient.GetItemsAsync(section);
+
+            return items.Where(x => x.Updated.ToString("yyyy-MM-dd") == updatedDate);
         }
     }
 }
